@@ -1,0 +1,223 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  height: 64px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  font-family: 'Arial', sans-serif;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* LEFT */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.logo img {
+  width: 40px;
+  height: 50px;
+}
+
+/* SEARCH */
+.search {
+  display: flex;
+  align-items: center;
+  background: #f1f3f4;
+  padding: 14px 37px;
+  border-radius: 8px;
+  width: 40%;
+}
+
+.search-icon {
+  color: #5f6368;
+  margin-right: 8px;
+}
+
+.search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+}
+
+/* RIGHT */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* ICONS */
+.material-icons {
+  color: #5f6368;
+  font-size: 23px;   /* increased size */
+  font-weight: 300;  /* slightly bold */
+}
+
+/* PROFILE */
+.profile-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+/* SETTINGS MENU ALIGN */
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* GOOGLE APPS MENU */
+.apps-menu {
+  padding: 0 !important;
+}
+
+.apps-container {
+  width: 300px;
+  padding: 16px;
+}
+
+.apps-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+/* GRID */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* EACH APP */
+.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.app-item:hover {
+  background-color: #f1f3f4;
+}
+
+/* ICON */
+.app-item img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 6px;
+}
+
+/* TEXT */
+.app-item span {
+  font-size: 13px;
+  font-weight: 500;  /* added */
+  color: #202124;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 60px;
+  height: 100vh;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+/* Expand on hover */
+.sidebar:hover {
+  width: 220px;
+}
+
+/* Menu item */
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+/* Hover effect */
+.menu-item:hover {
+  background: #f1f3f4;
+  border-radius: 0 25px 25px 0;
+}
+
+/* Active (like yellow in your image) */
+.menu-item.active {
+  background: #feefc3;
+  border-radius: 0 25px 25px 0;
+}
+
+/* Material icon */
+.material-icons {
+  font-size: 24px;
+  min-width: 40px;
+  text-align: center;
+  color: #5f6368;
+}
+
+/* Text */
+.text {
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+/* Show text on hover */
+.sidebar:hover .text {
+  opacity: 1;
+}
+/* HEADER ICON BUTTON */
+.header button[mat-icon-button] {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+/* ICON DEFAULT */
+.header mat-icon {
+  color: #5f6368;
+  font-size: 22px;
+  transition: color 0.2s ease;
+}
+
+/* HOVER EFFECT (like search bar) */
+.header button[mat-icon-button]:hover {
+  background-color: #f1f3f4;
+}
+
+/* ICON ON HOVER (slightly darker = bold feel) */
+.header button[mat-icon-button]:hover mat-icon {
+  color: #202124;
+}
+.header mat-icon { font-size: 28px; }
