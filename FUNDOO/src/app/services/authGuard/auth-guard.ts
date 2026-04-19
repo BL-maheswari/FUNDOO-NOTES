@@ -1,21 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import { inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { CanActivateFn, Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard implements CanActivate {
+export const AuthGuard: CanActivateFn = () => {
+  const router = inject(Router);
+  const platformId = inject(PLATFORM_ID);
 
-  constructor(private router: Router) {}
-
-  canActivate(): boolean {
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      return true;
-    } else {
-      this.router.navigate(['']); // redirect to login
-      return false;
-    }
+  // Guard against SSR — localStorage only exists in browser
+  if (!isPlatformBrowser(platformId)) {
+    return router.createUrlTree(['/login']);
   }
-}
+const token = localStorage.getItem('token');
+
+  if (token) {
+    return true;
+  }
+
+  return router.createUrlTree(['/login']);
+};

@@ -32,7 +32,7 @@ export class Registration {   // ✅ correct name
       service : 'advance'
     });
   }
-
+// toggle password function .it switches from true
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
