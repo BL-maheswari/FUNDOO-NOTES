@@ -1,0 +1,59 @@
+<!-- COLLAPSED NOTE -->
+@if (!isExpanded) {
+  <div class="note-collapsed" (click)="expandNote()">
+
+    <span class="placeholder">Take a note...</span>
+
+    <div class="note-actions">
+      <span class="icon">✔️</span>
+      <span class="icon">🎨</span>
+      <span class="icon">🖼️</span>
+    </div>
+
+  </div>
+}
+
+<!-- EXPANDED NOTE -->
+@if (isExpanded) {
+  <div class="note-expanded" (click)="$event.stopPropagation()">
+
+    <input
+      type="text"
+      placeholder="Title"
+      [(ngModel)]="newNote.title"
+      class="title-input"
+      (click)="$event.stopPropagation()"
+    >
+
+    <textarea
+      placeholder="Take a note..."
+      [(ngModel)]="newNote.description"
+      class="note-text"
+      (click)="$event.stopPropagation()"
+    ></textarea>
+
+    <!-- ✅ UPDATED ROW -->
+    <div class="note-bottom-row">
+      <app-icon-toolbar></app-icon-toolbar>
+      <button class="close-btn" (click)="closeNote()">Close</button>
+    </div>
+
+  </div>
+
+  <div class="overlay" (click)="closeNote()"></div>
+}
+
+<!-- NOTES GRID -->
+<div class="notes-container">
+  @for (note of notes||[]; track note.id) {
+    <div class="note-card" (click)="editNote(note)">
+
+      <div class="note-title">{{ note.title }}</div>
+      <div class="note-content">{{ note.description }}</div>
+
+      <!-- ICONS INSIDE NOTE -->
+      <app-icon-toolbar></app-icon-toolbar>
+
+    </div>
+  }
+</div>

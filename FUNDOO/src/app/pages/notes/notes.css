@@ -1,0 +1,133 @@
+body {
+  background: #f1f3f4;
+  font-family: Arial, sans-serif;
+}
+
+/* COLLAPSED NOTE */
+.note-collapsed {
+  width: 500px;
+  margin: 20px auto;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #dadce0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.placeholder {
+  color: #5f6368;
+}
+
+.note-actions {
+  display: flex;
+  gap: 15px;
+}
+
+/* EXPANDED NOTE */
+.note-expanded {
+  position: relative;
+  width: 500px;
+  margin: 20px auto;
+  padding: 12px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #dadce0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+/* INPUTS */
+.title-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.note-text {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  min-height: 90px;
+}
+
+/* FOOTER */
+.note-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* GRID */
+.notes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  padding: 20px 80px;
+}
+
+/* NOTE CARD */
+.note-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  min-height: 10px;
+  max-width:260px;
+}
+
+.note-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* TEXT */
+.note-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size:15px;
+}
+
+.note-content {
+  color: #5f6368;
+  font-size: 13px;
+}
+
+/* 🔥 KEEP ICONS INSIDE NOTE */
+app-icon-toolbar {
+ display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.note-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+}

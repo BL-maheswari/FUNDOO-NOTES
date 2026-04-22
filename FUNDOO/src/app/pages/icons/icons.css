@@ -1,0 +1,56 @@
+/* MAIN TOOLBAR */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* 👈 left + right alignment */
+  gap: 6px;
+  padding: 6px 8px;
+
+  width: 100%;         /* 👈 fit inside parent */
+  box-sizing: border-box;
+  overflow: hidden;    /* 👈 prevent overflow */
+}
+
+/* LEFT + RIGHT GROUPS */
+.left-icons,
+.right-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* BUTTON STYLE */
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.2s ease;
+}
+
+/* HOVER EFFECT */
+button:hover {
+  background-color: #f1f3f4;
+}
+
+/* ICON STYLE */
+.material-icons {
+  font-size: 18px;   /* 👈 slightly smaller like Keep */
+  color: #5f6368;
+}
+
+/* PREVENT ICON STRETCH */
+button {
+  flex-shrink: 0;
+}
+
+/* RESPONSIVE FIX (if space is small) */
+.toolbar {
+  flex-wrap: wrap;   /* 👈 moves icons instead of overflowing */
+}

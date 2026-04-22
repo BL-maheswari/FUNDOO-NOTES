@@ -1,2 +1,24 @@
-<app-header ><app-header>
-<app-notes></app-notes>
+<!-- <app-header></app-header>-->
+
+
+
+
+
+<div class="layout">
+
+  <!-- HEADER (optional top bar) -->
+  <app-header></app-header>
+
+  <div class="main">
+
+    <!-- SIDENAV -->
+    <app-sidenav></app-sidenav>
+
+    <!-- ROUTED CONTENT -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
+</div>

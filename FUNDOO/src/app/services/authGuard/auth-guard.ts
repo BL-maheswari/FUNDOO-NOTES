@@ -18,3 +18,4 @@ const token = localStorage.getItem('token');
 
   return router.createUrlTree(['/login']);
 };
+

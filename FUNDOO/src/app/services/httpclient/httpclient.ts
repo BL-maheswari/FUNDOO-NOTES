@@ -13,6 +13,7 @@ export class HttpService {
   getMethod(endPoint: string, headers: HttpHeaders = new HttpHeaders()){
     return this.http.get(this.baseUrl + endPoint, {headers})
   }
+  
 
   postMethod(endPoint: string, payLoad: any, headers: HttpHeaders = new HttpHeaders()) {
     return this.http.post(this.baseUrl + endPoint, payLoad, {headers});
