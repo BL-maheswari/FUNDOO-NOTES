@@ -6,15 +6,15 @@
 
 <div class="layout">
 
-  <!-- HEADER (optional top bar) -->
-  <app-header></app-header>
+  <!-- HEADER -->
+  <app-header (menuClick)="toggleSidebar()"></app-header>
 
   <div class="main">
 
     <!-- SIDENAV -->
-    <app-sidenav></app-sidenav>
+    <app-sidenav [expanded]="sidebarOpen"></app-sidenav>
 
-    <!-- ROUTED CONTENT -->
+    <!-- CONTENT -->
     <div class="content">
       <router-outlet></router-outlet>
     </div>
