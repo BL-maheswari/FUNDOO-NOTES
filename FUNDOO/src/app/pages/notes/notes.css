@@ -81,6 +81,7 @@ body {
 
 /* NOTE CARD */
 .note-card {
+  width:250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -111,11 +112,14 @@ body {
 
 /* 🔥 KEEP ICONS INSIDE NOTE */
 app-icon-toolbar {
- display: flex;
-  justify-content: space-between;
+ display: inline-flex;
+  flex-direction: row;
   align-items: center;
-  margin-top: 8px;
-  padding-top: 8px;
+  justify-content: flex-start;
+
+  gap: 10px;
+  flex-wrap: nowrap;        /* 🔥 prevents 2 lines */
+  white-space: nowrap; 
 }
 
 .note-bottom-row {

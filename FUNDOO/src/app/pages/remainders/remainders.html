@@ -1,1 +1,37 @@
-<p>remainders works!</p>
+<div class="remainders-container">
+
+  <h2>Remainders</h2>
+
+  <!-- Add -->
+  <div class="add-box">
+    <input #titleInput type="text" placeholder="Enter title">
+    <input #dateInput type="date">
+    <button (click)="addRemainder(titleInput.value, dateInput.value)">
+      Add
+    </button>
+  </div>
+
+  <!-- Empty State -->
+  @if (remainders.length === 0) {
+    <div class="empty">
+      No remainders available
+    </div>
+  }
+
+  <!-- List -->
+  @if (remainders.length > 0) {
+    <div class="list">
+      @for (r of remainders; track r.id) {
+        <div class="card">
+          <div>
+            <h4>{{ r.title }}</h4>
+            <p>{{ r.date }}</p>
+          </div>
+
+          <button (click)="deleteRemainder(r.id)">Delete</button>
+        </div>
+      }
+    </div>
+  }
+
+</div>
