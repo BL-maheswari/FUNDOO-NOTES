@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.note-dialog-panel .mat-mdc-dialog-container {
+  padding: 0 !important;
+}
+
+.note-dialog-panel .mat-mdc-dialog-surface {
+  padding: 0 !important;
+  box-shadow: none !important;
+  border-radius: 10px !important;
+}

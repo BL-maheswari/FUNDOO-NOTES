@@ -1,59 +1,82 @@
+<!-- TOGGLE BUTTON -->
+<button (click)="toggleView()">Toggle View</button>
+
 <!-- COLLAPSED NOTE -->
 @if (!isExpanded) {
   <div class="note-collapsed" (click)="expandNote()">
-
     <span class="placeholder">Take a note...</span>
 
     <div class="note-actions">
-      <span class="icon">✔️</span>
-      <span class="icon">🎨</span>
-      <span class="icon">🖼️</span>
+      <span>✔️</span>
+      <span>🎨</span>
+      <span>🖼️</span>
     </div>
-
   </div>
 }
 
 <!-- EXPANDED NOTE -->
 @if (isExpanded) {
-  <div class="note-expanded" (click)="$event.stopPropagation()">
 
-    <input
-      type="text"
-      placeholder="Title"
-      [(ngModel)]="newNote.title"
-      class="title-input"
-      (click)="$event.stopPropagation()"
-    >
+  <!-- OVERLAY -->
+  <div class="overlay" (click)="closeNote()"></div>
 
-    <textarea
-      placeholder="Take a note..."
-      [(ngModel)]="newNote.description"
-      class="note-text"
-      (click)="$event.stopPropagation()"
-    ></textarea>
+  <!-- NOTE FORM -->
+  <form class="note-expanded"
+        [formGroup]="noteForm"
+        (click)="$event.stopPropagation()">
 
-    <!-- ✅ UPDATED ROW -->
+    <input type="text"
+           placeholder="Title"
+           class="title-input"
+           formControlName="title" />
+
+    <textarea placeholder="Take a note..."
+              class="note-text"
+              formControlName="description">
+    </textarea>
+
     <div class="note-bottom-row">
-      <app-icon-toolbar></app-icon-toolbar>
-      <button class="close-btn" (click)="closeNote()">Close</button>
+
+      <!-- COLOR TOOLBAR (CREATE NOTE COLOR) -->
+      <app-icon-toolbar
+        (colorChange)="noteForm.patchValue({ color: $event })">
+      </app-icon-toolbar>
+
+      <button type="button" class="close-btn" (click)="createNote()">
+        Close & Save
+      </button>
+
     </div>
 
-  </div>
-
-  <div class="overlay" (click)="closeNote()"></div>
+  </form>
 }
 
-<!-- NOTES GRID -->
-<div class="notes-container">
-  @for (note of notes||[]; track note.id) {
-    <div class="note-card" (click)="editNote(note)">
+<!-- NOTES LIST -->
+<div class="notes-container"
+     [ngClass]="(isListView$ | async) ? 'list-view' : 'grid-view'">
+
+  @for (note of notes || []; track note.id) {
+
+    <div class="note-card"
+         [class.list-card]="(isListView$ | async)"
+         [style.background-color]="note.color">
 
       <div class="note-title">{{ note.title }}</div>
       <div class="note-content">{{ note.description }}</div>
 
-      <!-- ICONS INSIDE NOTE -->
-      <app-icon-toolbar></app-icon-toolbar>
+      <div class="note-toolbar" (click)="$event.stopPropagation()">
+
+        <!-- EXISTING NOTE COLOR TOOLBAR -->
+        <app-icon-toolbar
+          [note]="note"
+          (refresh)="getNotes()"
+          (colorChange)="changeColor(note, $event)">
+        </app-icon-toolbar>
+
+      </div>
 
     </div>
+
   }
+
 </div>

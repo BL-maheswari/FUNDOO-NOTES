@@ -1,1 +1,21 @@
-<p>archive works!</p>
+<div class="notes-container">
+  @for (note of notes; track note.id) {
+
+    <div class="note-card">
+
+      <div class="note-title">{{ note.title }}</div>
+      <div class="note-content">{{ note.description }}</div>
+
+      <div class="note-toolbar" (click)="$event.stopPropagation()">
+        <app-icon-toolbar 
+          [note]="note" 
+          context="archive"
+          (refresh)="getNotes()">
+          
+        </app-icon-toolbar>
+      </div>
+
+    </div>
+
+  }
+</div>

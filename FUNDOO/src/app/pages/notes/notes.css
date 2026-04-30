@@ -9,129 +9,134 @@ body {
   margin: 20px auto;
   padding: 10px 14px;
   border-radius: 8px;
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #dadce0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   cursor: pointer;
-}
-
-.placeholder {
-  color: #5f6368;
-}
-
-.note-actions {
-  display: flex;
-  gap: 15px;
 }
 
 /* EXPANDED NOTE */
 .note-expanded {
-  position: relative;
   width: 500px;
   margin: 20px auto;
   padding: 12px;
   border-radius: 8px;
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #dadce0;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  z-index: 10;
 }
 
 /* INPUTS */
-.title-input {
-  width: 100%;
-  border: none;
-  outline: none;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
+.title-input,
 .note-text {
   width: 100%;
   border: none;
   outline: none;
-  resize: none;
-  min-height: 90px;
 }
 
-/* FOOTER */
-.note-footer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* OVERLAY */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* GRID */
+/* CONTAINER BASE */
 .notes-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 16px;
   padding: 20px 80px;
+}
+
+/* GRID VIEW */
+.notes-container.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 280px));
+  gap: 16px;
+  justify-content: start;
+}
+
+/* LIST VIEW */
+.notes-container.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* NOTE CARD */
 .note-card {
-  width:250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #ffffff;
+  width: auto;                 /* 🔥 FIXED */
+  max-width: 260px;
+  background: #fff;
   border: 1px solid #dadce0;
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
-  min-height: 10px;
-  max-width:260px;
+  transition: 0.25s;
 }
 
 .note-card:hover {
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
+/* LIST MODE CARD */
+.list-card {
+  width: 100%;
+}
+
 /* TEXT */
 .note-title {
   font-weight: 600;
   margin-bottom: 6px;
-  font-size:15px;
 }
 
 .note-content {
   color: #5f6368;
-  font-size: 13px;
 }
 
-/* 🔥 KEEP ICONS INSIDE NOTE */
-app-icon-toolbar {
- display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-
-  gap: 10px;
-  flex-wrap: nowrap;        /* 🔥 prevents 2 lines */
-  white-space: nowrap; 
+/* TOOLBAR */
+.note-toolbar {
+  margin-top: 8px;
 }
 
+/* FOOTER */
 .note-bottom-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-top: 10px;
 }
 
+/* BUTTON */
 .close-btn {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px 8px;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+}
+
+/* 🎨 COLOR PALETTE */
+.color-palette {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* COLOR DOTS */
+.color-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #dadce0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* HOVER EFFECT */
+.color-circle:hover {
+  transform: scale(1.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* OPTIONAL: SELECTED COLOR (nice UX) */
+.color-circle.selected {
+  border: 2px solid #a142f4;
 }

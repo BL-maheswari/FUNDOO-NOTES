@@ -29,10 +29,15 @@
     </button>
 
     <!-- View -->
-    <button mat-icon-button matTooltip="Grid view">
-      <!-- <span class="material-icons">view_agenda</span> -->
-       <mat-icon>grid_on</mat-icon>
-    </button>
+    <button mat-icon-button
+        (click)="toggleView()"
+        matTooltip="Toggle view">
+
+  <mat-icon>
+    {{ (isListView$ | async) ? 'grid_view' : 'view_agenda' }}
+  </mat-icon>
+
+</button>
 
     <!-- Settings -->
     <button mat-icon-button 
@@ -50,16 +55,21 @@
        <mat-icon>apps</mat-icon>
     </button>
 
-    <div class="profile-card" matTooltip="Account">
+   
+<div class="profile-section">
 
-  <img src="assets/company-logo.png" class="company-logo">
+  <!-- Company Logo (rectangle) -->
+  <img src="assets/companyprofile.jpeg" class="company-logo">
 
-  <div class="profile-info">
-    <span class="company-name">BridgeLabz</span>
-    <span class="company-sub">Employability Delivered</span>
-  </div>
+  <!-- Profile Image (circle) -->
+  <img src="assets/profile.jpeg" class="profile-img">
 
-  <img src="assets/profile.jpg" class="profile-img">
+</div>
+  
+
+
+
+  
 
 </div>
 
@@ -133,12 +143,6 @@
         <img src="https://www.gstatic.com/images/branding/product/2x/meet_48dp.png">
         <span>Meet</span>
       </div>
-
-      <div class="app-item">
-        <img src="https://www.gstatic.com/images/branding/product/2x/account_circle_48dp.png">
-        <span>Account</span>
-      </div>
-
     </div>
 
   </div>

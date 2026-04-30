@@ -1,14 +1,11 @@
-/* MAIN TOOLBAR */
+/* ROOT TOOLBAR */
 .toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;  /* 👈 left + right alignment */
-  gap: 6px;
-  padding: 6px 8px;
-
-  width: 100%;         /* 👈 fit inside parent */
+  justify-content: space-between; /* KEY FIX */
+  width: 100%;
   box-sizing: border-box;
-  overflow: hidden;    /* 👈 prevent overflow */
+  padding: 4px 6px;
 }
 
 /* LEFT + RIGHT GROUPS */
@@ -19,38 +16,61 @@
   gap: 6px;
 }
 
-/* BUTTON STYLE */
+/* BUTTON RESET */
 button {
   background: transparent;
   border: none;
   cursor: pointer;
+
+  padding: 4px;
   border-radius: 50%;
-  padding: 8px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition: background 0.2s ease;
 }
 
-/* HOVER EFFECT */
+/* HOVER */
 button:hover {
   background-color: #f1f3f4;
 }
 
-/* ICON STYLE */
+/* ICON */
 .material-icons {
-  font-size: 18px;   /* 👈 slightly smaller like Keep */
+  font-size: 18px;
   color: #5f6368;
 }
 
-/* PREVENT ICON STRETCH */
-button {
-  flex-shrink: 0;
+/* COLOR PICKER */
+.color-wrapper input[type="color"] {
+  display: none;
 }
 
-/* RESPONSIVE FIX (if space is small) */
-.toolbar {
-  flex-wrap: wrap;   /* 👈 moves icons instead of overflowing */
+.color-wrapper {
+  position: relative;
+}
+
+.color-palette {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+.color-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #dadce0;
+}
+
+.color-circle:hover {
+  transform: scale(1.2);
 }

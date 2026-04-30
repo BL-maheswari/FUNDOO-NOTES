@@ -1,43 +1,114 @@
 <div class="toolbar">
 
-  <button (click)="onClick('format')" title="Format">
-    <span class="material-icons">format_bold</span>
-  </button>
+  <!-- LEFT SIDE -->
+  <div class="left-icons">
 
-  <button (click)="onClick('color')" title="Background">
+    @if (context === 'note' || context === 'archive') {
+
+      <!-- FORMAT -->
+      <button>
+        <span class="material-icons">format_bold</span>
+      </button>
+
+     <div class="color-wrapper">
+
+  <!-- 🎨 ICON -->
+  <button (click)="togglePalette()">
     <span class="material-icons">palette</span>
   </button>
 
-  <button (click)="onClick('reminder')" title="Reminder">
-    <span class="material-icons">notifications</span>
-  </button>
-
-  <button (click)="onClick('collaborator')" title="Collaborator">
-    <span class="material-icons">person_add</span>
-  </button>
-
-  <button (click)="onClick('image')" title="Add Image">
-    <span class="material-icons">image</span>
-  </button>
-
-  <button (click)="onClick('archive')" title="Archive">
-    <span class="material-icons">archive</span>
-  </button>
-
-  <button (click)="onClick('more')" title="More">
-    <span class="material-icons">more_vert</span>
-  </button>
-
-  <button (click)="onClick('undo')" title="Undo">
-    <span class="material-icons">undo</span>
-  </button>
-
-  <button (click)="onClick('redo')" title="Redo">
-    <span class="material-icons">redo</span>
-  </button>
+  <!-- 🎨 FIXED COLOR PALETTE -->
+  @if (showPalette) {
+    <div class="color-palette">
+      @for (color of colorPalette; track color) {
+        <div 
+          class="color-circle"
+          [style.background]="color"
+          (click)="selectColor(color)">
+        </div>
+      }
+    </div>
+  }
 
 </div>
 
 
+      <!-- REMINDER -->
+      <button (click)="reminder()">
+        <span class="material-icons">notifications</span>
+      </button>
+
+      <!-- COLLABORATOR -->
+      <button (click)="collaborator()">
+        <span class="material-icons">person_add</span>
+      </button>
+
+      <!-- IMAGE -->
+      <button (click)="image()">
+        <span class="material-icons">image</span>
+      </button>
+
+    }
+
+  </div>
 
 
+  <!-- RIGHT SIDE -->
+  <div class="right-icons">
+
+    <!-- NOTES PAGE -->
+    @if (context === 'note') {
+
+      <!-- ARCHIVE -->
+      <button (click)="archive()">
+        <span class="material-icons">archive</span>
+      </button>
+
+      <!-- DELETE (to trash) -->
+      <button (click)="deleteNote()">
+        <span class="material-icons">delete</span>
+      </button>
+
+    }
+
+
+    <!-- ARCHIVE PAGE -->
+    @if (context === 'archive') {
+
+      <!-- UNARCHIVE -->
+      <button (click)="unarchive()">
+        <span class="material-icons">unarchive</span>
+      </button>
+
+      <!-- DELETE (to trash) -->
+      <button (click)="deleteNote()">
+        <span class="material-icons">delete</span>
+      </button>
+
+    }
+
+
+    <!-- TRASH PAGE -->
+    @if (context === 'trash') {
+
+      <!-- RESTORE -->
+      <button (click)="restore()">
+        <span class="material-icons">restore_from_trash</span>
+      </button>
+
+      <!-- DELETE FOREVER -->
+      <button (click)="deleteForever()">
+        <span class="material-icons">delete_forever</span>
+      </button>
+
+    }
+
+
+    <!-- COMMON (ALL PAGES) -->
+    <button (click)="more()">
+      <span class="material-icons">more_vert</span>
+    </button>
+
+  </div>
+
+</div>

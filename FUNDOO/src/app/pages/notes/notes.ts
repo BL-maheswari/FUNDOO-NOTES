@@ -1,86 +1,80 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { AsyncPipe, CommonModule, NgClass } from '@angular/common';
 import { IconToolbarComponent } from '../icons/icons';
 import { NoteService } from '../../services/note/note';
+import { ViewService } from '../../services/viewService/view-service';
 
 @Component({
   selector: 'app-notes',
   standalone: true,
-  imports: [CommonModule, FormsModule, IconToolbarComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    IconToolbarComponent,
+    AsyncPipe, NgClass
+  ],
   templateUrl: './notes.html',
   styleUrls: ['./notes.css']
 })
 export class NotesComponent {
 
-  constructor(private noteService: NoteService) {}
+  colorPalette: string[] = [
+  '#ffffff',
+  '#f28b82',
+  '#fbbc04',
+  '#fff475',
+  '#ccff90',
+  '#a7ffeb',
+  '#cbf0f8',
+  '#aecbfa',
+  '#d7aefb',
+  '#fdcfe8',
+  '#e6c9a8',
+  '#e8eaed'
+];
+
+  isListView$;
+  
+  constructor(
+    private noteService: NoteService,
+    private fb: FormBuilder,
+    private viewService: ViewService
+  ) {    this.isListView$ = this.viewService.isListView$;
+}
 
   isExpanded = false;
-
   notes: any[] = [];
+  noteForm!: FormGroup;
 
-  newNote: any = {
-    id:null,
-    title: '',
-    description: '',
-    color:''
-  };
-
-  editingNote: any = null;
-
-
+  editingNoteId: string | null = null;
 
   ngOnInit() {
+     this.viewService.isListView$.subscribe(val => {
+    console.log('NOTES VIEW MODE:', val);
+  });
+    this.noteForm = this.fb.group({
+      title: [''],
+      description: [''],
+      color: ['']
+    });
+
     this.getNotes();
   }
 
-//   getNotes() {
-//   this.noteService.getNotes().subscribe({
-//     next: (res: any) => {
-//         console.log("API RESPONSE:", res); // 👈 ADD THIS
-//       this.notes = res?.data || res?.notes || res || [];
-      
-//     },
-//     error: (err) => {
-//       console.error('Error fetching notes', err);
-//     }
-//   });
-// }
-
-
-getNotes() {
-  this.noteService.getNotes().subscribe({
-    next: (res: any) => {
-      console.log("FULL RESPONSE:", res);
-
-      this.notes = res?.data?.data || res?.data?.notes || [];
-
-      console.log("FINAL NOTES:", this.notes);
-    },
-    error: (err) => {
-      console.error('Error fetching notes', err);
-    }
-  });
-}
-
+  // CREATE
   expandNote() {
     this.isExpanded = true;
   }
 
   closeNote() {
-   
-    if (this.newNote.title?.trim() || this.newNote.description?.trim()) {
+    const value = this.noteForm.value;
 
-      if (this.editingNote) {
-        this.editingNote.title = this.newNote.title;
-        this.editingNote.description = this.newNote.description;
-        this.editingNote.color=this.newNote.color;
-      } else {
-         this.noteService.addNote(this.newNote).subscribe(() => {
-    
-          this.getNotes();
-        });
-      }
+    if (value.title?.trim() || value.description?.trim()) {
+      this.noteService.addNote(value).subscribe(() => {
+        this.getNotes();
+      });
     }
 
     this.resetNote();
@@ -88,13 +82,91 @@ getNotes() {
 
   resetNote() {
     this.isExpanded = false;
-    this.newNote = {  title: '',description:'',color:''};
-    this.editingNote = null;
+    this.noteForm.reset({
+      title: '',
+      description: '',
+      color: ''
+    });
   }
 
-  editNote(note: any) {
-    this.isExpanded = true;
-    this.newNote = { ...note };
-    this.editingNote = note;
+  // FETCH
+  getNotes() {
+    this.noteService.getNotes().subscribe({
+      next: (res: any) => {
+        const allNotes = res?.data?.data || res?.data?.notes || [];
+
+        this.notes = allNotes.filter(
+          (note: any) => !note.isArchived && !note.isDeleted
+        );
+      },
+      error: (err: any) => console.error(err)
+    });
   }
+
+  // EDIT MODE
+  startEdit(note: any) {
+    this.editingNoteId = note.id;
+  }
+
+  stopEdit() {
+    this.editingNoteId = null;
+  }
+
+
+  createNote() {
+  const value = this.noteForm.value;
+
+  if (!value.title?.trim() && !value.description?.trim()) {
+    this.isExpanded = false;
+    return;
+  }
+
+  this.noteService.addNote(value).subscribe({
+    next: () => {
+      this.getNotes();
+      this.resetNote();
+    },
+    error: (err) => console.error(err)
+  });
+}
+  // UPDATE
+  updateNote(note: any) {
+    const payload = {
+      noteIdList: [note.id],
+      title: note.title,
+      description: note.description,
+      color: note.color
+    };
+
+    this.noteService.updateNote(payload).subscribe({
+      next: () => {
+        this.getNotes();
+        this.stopEdit();
+      },
+      error: (err: any) => console.error(err)
+    });
+  }
+
+  // ARCHIVE
+  onArchive(noteId: string) {
+    this.noteService.archiveNote(noteId).subscribe(() => {
+      this.getNotes();
+    });
+  }
+
+  // COLOR
+  changeColor(note: any, color: string) {
+    note.color = color;
+    this.noteService.changeColorNotes(note.id, color)
+      .subscribe(() => this.getNotes());
+  }
+
+  // DELETE
+  deleteForever(note: any) {
+    this.noteService.deleteForeverNotes(note.id)
+      .subscribe(() => this.getNotes());
+  }
+  toggleView() {
+  this.viewService.toggleView();
+}
 }

@@ -200,27 +200,64 @@ body {
 .header button[mat-icon-button] {
   width: 40px;
   height: 40px;
+  padding: 0;   /* 🔥 ADD THIS (MOST IMPORTANT FIX) */
   border-radius: 50%;
-  transition: background 0.2s ease;
+  display: flex;  /* 🔥 ADD */
+  align-items: center; /* 🔥 ADD */
+  justify-content: center; /* 🔥 ADD */
 }
 
 /* ICON DEFAULT */
 .header mat-icon {
   color: #5f6368;
-  font-size: 22px;
+  font-size: 20px;
   transition: color 0.2s ease;
+ 
 }
 
 /* HOVER EFFECT (like search bar) */
 .header button[mat-icon-button]:hover {
   background-color: #f1f3f4;
+  transform: scale(1.1);
 }
 
 /* ICON ON HOVER (slightly darker = bold feel) */
 .header button[mat-icon-button]:hover mat-icon {
-  color: #202124;
+  /*color: #202124;*/
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 .header mat-icon { font-size: 28px; }
 
 
+.profile-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 18px;
+  border: 1px solid rgba(0, 0, 0, 0.25); /* 🔥 light black border */
+  border-radius: 35px; /* 🔥 rounded rectangle */
+  background-color: #fff;
 
+}
+
+/* Company logo = rectangle */
+.company-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Profile = circle */
+.profile-img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit:cover;
+  border: 1px solid #ddd;
+  margin-left: auto;
+  
+ 
+ 
+
+}
