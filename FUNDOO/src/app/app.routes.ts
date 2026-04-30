@@ -6,7 +6,7 @@ import { AuthGuard } from './services/authGuard/auth-guard';
 import { NotesComponent } from './pages/notes/notes';
 import { IconToolbarComponent } from './pages/icons/icons';
 import { SidenavComponent } from './pages/sidenav/sidenav';
-import { RemaindersComponent } from './pages/remainders/remainders';
+import { Remainders } from './pages/remainders/remainders';
 import { Archive } from './pages/archive/archive';
 import { Trash } from './trash/trash';
 import { Labels } from './pages/labels/labels';
@@ -26,7 +26,7 @@ export const routes: Routes = [
     children:[
       { path:'',redirectTo:'notes',pathMatch:'full'},
       { path:'notes',component:NotesComponent},
-      {path:'remainders',component:RemaindersComponent},
+      {path:'remainders',component:Remainders},
       {path:'archive',component:Archive},
       {
         path:'trash',component:Trash

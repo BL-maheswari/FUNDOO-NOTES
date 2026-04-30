@@ -1,24 +1,29 @@
 <div class="sidenav" [class.collapsed]="!expanded">
 
   <!-- MENU BUTTON -->
-  <!-- <div class="menu-btn">
+  <div class="menu-btn" (click)="toggle()">
     <span class="material-symbols-outlined">menu</span>
-  </div> -->
+  </div>
 
   <!-- NAV ITEMS -->
   @for (item of navItems; track item.name) {
-  <div class="nav-item"
-       [routerLink]="item.route"
-       routerLinkActive="active">
+    <div 
+      class="nav-item"
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
 
-    <span class="material-icons">
-      {{ item.icon }}
-    </span>
+      <!-- ICON -->
+      <span class="material-symbols-outlined">
+        {{ item.icon }}
+      </span>
 
-    @if (expanded) {
-      <span class="text">{{ item.label }}</span>
-    }
+      <!-- TEXT (only when expanded) -->
+      @if (expanded) {
+        <span class="text">{{ item.label }}</span>
+      }
 
-  </div>
-}
+    </div>
+  }
+
 </div>

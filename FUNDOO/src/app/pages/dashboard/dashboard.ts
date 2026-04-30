@@ -1,7 +1,24 @@
+// import { Component } from '@angular/core';
+// import { Header } from './header/header';
+// // import { Notes } from './notes/notes';
+
+// @Component({
+//   selector: 'app-dashboard',
+//   standalone:true,
+//   imports: [Header],
+//   templateUrl: './dashboard.html',
+//   styleUrl: './dashboard.css',
+// })
+// export class Dashboard {}
+
+
+
+
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
 import { Header } from './header/header';
-import { SidenavComponent } from '../sidenav/sidenav';
+import { SidenavComponent } from '../sidenav/sidenav'; // adjust path if needed
 
 @Component({
   selector: 'app-dashboard',
@@ -10,11 +27,4 @@ import { SidenavComponent } from '../sidenav/sidenav';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
-
-  sidebarOpen = true;
-
-  toggleSidebar() {
-    this.sidebarOpen = !this.sidebarOpen;
-  }
-}
+export class Dashboard {}
